@@ -59,6 +59,8 @@ for (site in file_names){
 
 # Standardizing the chronologies together ####
 
-standardize_tra(joint_tra, )
+# Together: RSq=0.29, AIC=-14088
+# Split:    RSq=0.49, AIC=-18031
+joint_std_output <- standardize_tra(joint_tra, split="Time", model = c("Time", "Age"), return_data = T, make_plots=F, show_plots = F)
 
-
+write.csv(joint_std_output$dat$residuals, file=paste0(joint_residuals_directory, "/", site_id, "_joint_resid.csv"))
