@@ -3,8 +3,8 @@ library(stringr)
 library(dplR)
 
 # Finding data
-data_directory <- "./red_pine_data/RWL_split"
-output_directory <- "./red_pine_data/RWL"
+data_directory <- "./RP-exploration/data/RWL_split"
+output_directory <- "./RP-exploration/data/RWL"
 
 
 file_names <- list.files("./red_pine_data/RWL_split")
