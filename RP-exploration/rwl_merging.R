@@ -7,7 +7,7 @@ data_directory <- "./RP-exploration/data/RWL_split"
 output_directory <- "./RP-exploration/data/RWL"
 
 
-file_names <- list.files("./red_pine_data/RWL_split")
+file_names <- list.files(data_directory)
 
 # Identifying site by file name
 site_names <- sapply(file_names, function(x){
