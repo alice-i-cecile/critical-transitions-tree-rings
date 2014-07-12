@@ -43,7 +43,10 @@ shinyUI(pageWithSidebar(
       ),
       
       # View entire dataset of flagged suppression events
-      tabPanel("Suppression events", dataTableOutput("suppression_data_table"))
+      tabPanel("Suppression events", dataTableOutput("suppression_data_table")),
+      
+      # View original dataset of tree rings
+      tabPanel("Tree ring data", dataTableOutput("tree_ring_data_table"))
     ) 
   )
 ))

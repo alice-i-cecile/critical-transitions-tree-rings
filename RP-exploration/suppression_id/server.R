@@ -41,7 +41,9 @@ $datapath)
   
   # Reactive UI for selecting series and years ####
   {
-#     output$series_list <- renderUI()
+    output$series_list <- renderUI(      
+      selectizeInput("series_selected", choices=unique(series()$Tree))
+    )
     
 #     output$year_list <- renderUI()
   }
@@ -68,5 +70,10 @@ $datapath)
     
 #     output$suppression_data_table <- renderDataTable()
     
+  }
+
+  # Tables of suppression results #### 
+  {
+  output$tree_ring_data_table <- renderDataTable(series())
   }
 })
