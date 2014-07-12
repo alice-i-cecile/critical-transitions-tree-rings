@@ -29,7 +29,14 @@ $datapath)
   
   # Downloading results ####
   {
-#     output$suppression_data_download <- downloadHandler()
+    output$suppression_data_download <- downloadHandler(
+      filename = function() {
+        paste('suppression-', Sys.Date(), '.csv', sep='')
+      },
+      content = function(file) {
+        write.csv(suppression_data, file)
+      }
+    )
   }
   
   # Reactive UI for selecting series and years ####
