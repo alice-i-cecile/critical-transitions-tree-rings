@@ -1,7 +1,7 @@
 shinyUI(pageWithSidebar(
   
   # Application title
-  headerPanel("Identifying suppression in tree ring series"),
+  headerPanel("Identifying suppression events in tree ring series"),
   
   # Sidebar with a slider input
   sidebarPanel(
