@@ -5,11 +5,11 @@ shinyUI(pageWithSidebar(
   
   # Sidebar with a slider input
   sidebarPanel(
-    fileInput("series", "Upload tree ring series (.csv)"),
+    fileInput("series_file", "Upload tree ring series (.csv)"),
     
-    fileInput("old_suppression_data", "Upload previous suppression event data to resume work"),
+    fileInput("old_suppression_data_file", "Upload previous suppression event data to resume work"),
     
-    downloadButton("suppression_data", "Download suppression event data")
+    downloadButton("suppression_data_download", "Download suppression event data")
   ),
   
   # Main panels
