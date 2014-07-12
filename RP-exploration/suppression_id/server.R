@@ -5,9 +5,25 @@ shinyServer(function(input, output) {
   
   # Uploading data ####
   {
-#   series <- reactive({})
-  
-#   old_suppression_data <- reactive({})
+  series <- reactive({
+    if(is.null(input$series_file)){
+      return(NULL)
+    }
+    
+    read.csv(input$series_file$datapath)
+    
+  })
+
+  old_suppression_data <- reactive({
+    if(is.null(input$old_suppression_data_file
+)){
+      return(NULL)
+    }
+    
+    read.csv(input$old_suppression_data_file
+$datapath)
+    
+  })
   
   }
   
