@@ -35,7 +35,7 @@ shinyUI(pageWithSidebar(
         actionButton("flag_release", "Flag end of suppression (release)"),
         
         # Remove all flags
-        actionButton("clear_flags", "Clear flags for this series")
+        actionButton("clear_flags", "Clear flags for this series"),
         
         # Show current flags for series
         dataTableOutput("series_flags")
