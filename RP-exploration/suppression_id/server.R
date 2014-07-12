@@ -5,43 +5,45 @@ shinyServer(function(input, output) {
   
   # Uploading data ####
   {
-  input$series 
+#   series <- reactive({})
   
-  input$old_suppression_data
+#   old_suppression_data <- reactive({})
+  
   }
   
   # Downloading results ####
   {
-    output$suppression_data
+#     output$suppression_data_download <- downloadHandler()
   }
   
   # Reactive UI for selecting series and years ####
   {
-    output$series_list
+#     output$series_list <- renderUI()
     
-    output$year_list
+#     output$year_list <- renderUI()
   }
   
   # Flagging suppression and release events ####
   {
-    input$flag_suppression
-    
-    input$flag_release
-    
-    input$clear_flags
+#     suppression_data <- reactive({
+#       input$flag_suppression
+#       
+#       input$flag_release
+#       
+#       input$clear_flags
+#     })
   }
   
   # Plot of series with flags ####
   {
-    output$series_plot
+#     output$series_plot <- renderPlot()
   }
   
   # Tables of suppression results #### 
   {
-    output$series_flags
+#     output$series_flags <- renderDataTable()
     
-    output$suppression_data_table
-    
+#     output$suppression_data_table <- renderDataTable()
     
   }
 })
