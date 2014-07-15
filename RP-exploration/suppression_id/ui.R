@@ -37,6 +37,11 @@ shinyUI(pageWithSidebar(
         # Remove all flags
         actionButton("clear_flags", "Clear flags for this series"),
         
+        # Simple counters for flag buttons
+        textOutput("suppression_counter"),
+        textOutput("release_counter"),
+        textOutput("clear_counter"),
+        
         # Show current flags for series
         dataTableOutput("series_flags")
         

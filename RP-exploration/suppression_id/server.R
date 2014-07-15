@@ -29,6 +29,18 @@ series_flag_plot <- function(tree, year, all_series, flags){
   return(series_plot)
 }
 
+# Storing flags ###
+
+save_counters <- function(counters){
+  write.csv(counters, file="temp_suppression_counters.csv")
+}
+
+load_counters <- function(){
+  counters <- read.csv(file="temp_suppression_counters.csv")
+  
+  return(counters)
+}
+
 # Server ####
 
 shinyServer(function(input, output) {
@@ -79,28 +91,52 @@ $datapath)
       selectizeInput("year_selected", strong("Select year"), choices=get_years(input$series_selected, series()))
     )
   }
-  
-  # Flagging suppression and release events ####
-  {
-#     suppression_data <- reactive({
-#       input$flag_suppression
-#       
-#       input$flag_release
-#       
-#       input$clear_flags
-#     })
-  }
-  
+
   # Plot of series with flags ####
   {
     output$series_plot <- renderPlot(series_flag_plot(input$series_selected, input$year_selected, series(), suppression_data))
   }
-  
+
+# Flagging suppression and release events ####
+{
+      suppression_counters <- reactive({
+        
+        counters <- c(Suppression=input$flag_suppression, Release=input$flag_release, Clear=input$clear_flags)
+        save_counters(counters)
+
+        return (counters)
+      })
+      
+      suppression_data <- reactive({
+          input$flag_suppression
+          
+          suppression_df <- isolate({
+            data.frame(Event="Suppression", Tree=input$series_selected, Year=input$year_selected)
+          })
+          
+          return(suppression_df)
+        
+#         new_counters <- suppression_counters()
+#         
+#         old_counters <- load_counters()
+#         
+#         if (new_counters$Suppression != old_counters$Suppression){
+#           rbind
+#         }
+      })
+      
+      output$suppression_counter <- renderText(input$flag_suppression)
+      output$release_counter <- renderText(input$flag_release)
+      output$clear_counter <- renderText(input$clear_flags)
+      
+      
+}
+
   # Tables of suppression results #### 
   {
 #     output$series_flags <- renderDataTable()
     
-#     output$suppression_data_table <- renderDataTable()
+    output$suppression_data_table <- renderDataTable(suppression_data())
     
   }
 
