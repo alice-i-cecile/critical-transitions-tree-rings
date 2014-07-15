@@ -22,12 +22,12 @@ shinyUI(pageWithSidebar(
         # Select series
         uiOutput("series_list"),
         
-        # Show plot
-        plotOutput("series_plot"),
-        
         # Select year
         uiOutput("year_list"),
         
+        # Show plot
+        plotOutput("series_plot"),
+
         # Flag suppression start
         actionButton("flag_suppression", "Flag start of suppression"),
         

@@ -1,6 +1,20 @@
 #  Libraries ####
 library(shiny)
 
+# Utilities ####
+
+# Find years listed in series, return sorted list
+get_years <- function(tree, all_series){
+  
+  tree_data <- all_series[all_series$Tree==tree, ]
+    
+  years <- unique(tree_data$Time)
+  
+  years <- sort(as.numeric(years))
+    
+  return(years)
+}
+
 shinyServer(function(input, output) {
   
   # Uploading data ####
@@ -42,10 +56,12 @@ $datapath)
   # Reactive UI for selecting series and years ####
   {
     output$series_list <- renderUI(      
-      selectizeInput("series_selected", choices=unique(series()$Tree))
+      selectizeInput("series_selected", strong("Select series"), choices=unique(series()$Tree), series())
     )
     
-#     output$year_list <- renderUI()
+    output$year_list <- renderUI(      
+      selectizeInput("year_selected", strong("Select year"), choices=get_years(input$series_selected, series()))
+    )
   }
   
   # Flagging suppression and release events ####
