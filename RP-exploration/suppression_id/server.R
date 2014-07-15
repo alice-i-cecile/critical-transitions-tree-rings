@@ -1,5 +1,6 @@
 #  Libraries ####
 library(shiny)
+library(ggplot2)
 
 # Utilities ####
 
@@ -14,6 +15,21 @@ get_years <- function(tree, all_series){
     
   return(years)
 }
+
+# Plotting ####
+
+series_flag_plot <- function(tree, year, all_series, flags){
+  
+  print(year)
+  
+  tree_data <- all_series[all_series$Tree==tree, ]
+  
+  series_plot <- ggplot(tree_data, aes(x=Time, y=Growth)) + geom_line() + theme_bw() + xlab("Year") + geom_hline(y=mean(tree_data$Growth)) + geom_vline(x=as.numeric(year))
+  
+  return(series_plot)
+}
+
+# Server ####
 
 shinyServer(function(input, output) {
   
@@ -77,7 +93,7 @@ $datapath)
   
   # Plot of series with flags ####
   {
-#     output$series_plot <- renderPlot()
+    output$series_plot <- renderPlot(series_flag_plot(input$series_selected, input$year_selected, series(), suppression_data))
   }
   
   # Tables of suppression results #### 
@@ -88,8 +104,8 @@ $datapath)
     
   }
 
-  # Tables of suppression results #### 
+  # Table of original ring width data #### 
   {
-  output$tree_ring_data_table <- renderDataTable(series())
+    output$tree_ring_data_table <- renderDataTable(series())
   }
 })
